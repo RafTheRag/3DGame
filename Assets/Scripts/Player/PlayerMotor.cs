@@ -76,4 +76,8 @@ public class PlayerMotor : MonoBehaviour
             speed = 5;
         }
     }
+
+    public void Shoot(){
+        
+    }
 }

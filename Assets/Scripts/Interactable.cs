@@ -6,8 +6,12 @@ public abstract class Interactable : MonoBehaviour
 {
     public string promptMessage;
     public AudioSource interactSound;
+    public bool useEvents;
 
     public void BaseInteract(){
+        if(useEvents){
+            GetComponent<InteractionEvent>().OnInteract.Invoke();
+        }
         interactSound.Play();
         Interact();
     }
