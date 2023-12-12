@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
+    Animator enemySoldier;
 
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         stateMachine.Initialize();
         player = GameObject.FindGameObjectWithTag("Player");
+        enemySoldier=GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -41,9 +43,11 @@ public class Enemy : MonoBehaviour
     public bool CanSeePlayer(){
         if(player != null){
             if(Vector3.Distance(transform.position, player.transform.position) < sightDistance){
+                enemySoldier.SetBool("moving", true);
                 Vector3 targetDirection = player.transform.position - transform.position - (Vector3.up * eyeHeight);
                 float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
                 if(angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView){
+                    enemySoldier.SetBool("shooting", true);
                     Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
                     RaycastHit hitInfo = new RaycastHit();
                     if(Physics.Raycast(ray, out hitInfo, sightDistance)){
