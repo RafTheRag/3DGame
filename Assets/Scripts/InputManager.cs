@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
         look = GetComponent<PlayerLook>();
         onFoot.Crouch.performed += ctx => motor.Crouch();
         onFoot.Sprint.performed += ctx => motor.Sprint();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update(){
