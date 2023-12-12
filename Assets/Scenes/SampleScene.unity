@@ -18994,6 +18994,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 
   path: {fileID: 1525746120}
+  sightDistance: 20
+  fieldOfView: 85
+  eyeHeight: 0
+  gunBarrel: {fileID: 0}
+  firerate: 6.67
 --- !u!136 &1015387201
 CapsuleCollider:
   m_ObjectHideFlags: 0
