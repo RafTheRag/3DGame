@@ -23,6 +23,7 @@ public class PatrolState : BaseState
     public void PatrolCycle(){
         if(enemy.Agent.remainingDistance < 0.2){
             waitTimer += Time.deltaTime;
+            enemy.GetComponent<Animator>().SetBool("moving", true);
             if(waitTimer > 3){
                 if(waypointIndex < enemy.path.waypoints.Count - 1){
                     waypointIndex++;

@@ -21,6 +21,8 @@ public class GunSystem : MonoBehaviour
     //Graphics
     public GameObject muzzleFlash; //bulletHoleGraphic;
     public TextMeshProUGUI text;
+    public AudioSource sound;
+    public AudioSource sound3;
 
     private void Awake()
     {
@@ -79,6 +81,8 @@ public class GunSystem : MonoBehaviour
         bulletsLeft--;
         bulletsShot--;
 
+        sound.Play();
+
         Invoke("ResetShot", timeBetweenShooting);
 
         if(bulletsShot > 0 && bulletsLeft > 0)
@@ -91,6 +95,7 @@ public class GunSystem : MonoBehaviour
     private void Reload()
     {
         reloading = true;
+        sound3.Play();
         Invoke("ReloadFinished", reloadTime);
     }
     private void ReloadFinished()

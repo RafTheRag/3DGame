@@ -30,7 +30,11 @@ public class AttackState : BaseState
             }
             if(moveTimer > Random.Range(3, 7)){
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 5));
+                enemy.GetComponent<Animator>().SetBool("moving", true);
                 moveTimer = 0;
+            }
+            else{
+                enemy.GetComponent<Animator>().SetBool("moving", false);
             }
             enemy.LastKnownPosition = enemy.Player.transform.position;
         } else{
@@ -44,6 +48,8 @@ public class AttackState : BaseState
     public void Shoot(){
         Transform gunbarrel = enemy.gunBarrel;
         GameObject bullet = GameObject.Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, gunbarrel.position, enemy.transform.rotation);
+        GameObject.Instantiate(Resources.Load("Prefabs/Flash") as GameObject, gunbarrel.position, enemy.transform.rotation);
+        enemy.sound.Play();
         Vector3 shootDirection = (enemy.Player.transform.position - gunbarrel.transform.position).normalized;
         bullet.GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(Random.Range(-3f, 3f), Vector3.up) * shootDirection * 40;
 

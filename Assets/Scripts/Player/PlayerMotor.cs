@@ -14,6 +14,7 @@ public class PlayerMotor : MonoBehaviour
     float crouchTimer = 1;
     bool lerpCrouch = false;
     bool sprinting = false;
+    public AudioSource sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,10 @@ public class PlayerMotor : MonoBehaviour
                 crouchTimer = 0f;
             }
         }
+        /*if((Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d")) && isGrounded){
+            sound.Play();
+            StartCoroutine(WaitForSound(sound));
+        }*/
     }
 
     public void ProcessMove(Vector2 input){
@@ -77,7 +82,9 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
-    public void Shoot(){
-        
+    public IEnumerator WaitForSound(AudioSource Sound)
+    {
+       yield return new WaitUntil(() => Sound.isPlaying == false);
     }
+
 }

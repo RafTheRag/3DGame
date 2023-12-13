@@ -13,7 +13,7 @@ public class SearchState : BaseState
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+ 
     }
 
     public override void Perform()
@@ -26,7 +26,10 @@ public class SearchState : BaseState
             moveTimer += Time.deltaTime;
             if(moveTimer > Random.Range(3, 5)){
                 enemy.Agent.SetDestination(enemy.transform.position + (Random.insideUnitSphere * 10));
+                enemy.GetComponent<Animator>().SetBool("moving", true);
                 moveTimer = 0;
+            }else{
+                enemy.GetComponent<Animator>().SetBool("moving", false);
             }
             if(searchTimer > 10){
                 stateMachine.ChangeState(new PatrolState());
